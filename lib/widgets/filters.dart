@@ -51,7 +51,9 @@ class _FiltersState extends State<Filters> {
                   child: Text(
                     filter,
                     style: TextStyle(
-                      color: const Color(0xFF003366).withOpacity(0.9),
+                      color: selectedFilter == filter
+                          ? const Color(0XFFFFFFFF)
+                          : const Color(0xFF003366),
                     ),
                   ),
                 ),
@@ -60,7 +62,7 @@ class _FiltersState extends State<Filters> {
                   borderRadius: BorderRadius.circular(30),
                 ),
                 backgroundColor: selectedFilter == filter
-                    ? const Color(0xFF003366).withOpacity(0.4)
+                    ? const Color(0xFF003366).withOpacity(0.8)
                     : const Color(0xFF003366).withOpacity(0.05),
               ),
             ),

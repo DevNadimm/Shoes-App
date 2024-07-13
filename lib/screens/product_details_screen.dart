@@ -104,12 +104,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             });
                           },
                           child: Chip(
+                            padding: const EdgeInsets.all(10),
                             label: Text(
                               size.toString(),
+                              style: TextStyle(
+                                color: isSelected == size
+                                    ? const Color(0XFFFFFFFF)
+                                    : const Color(0xFF003366),
+                              ),
                             ),
+                            side: BorderSide.none,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40)),
                             backgroundColor: isSelected == size
-                                ? const Color(0xFF003366).withOpacity(0.3)
-                                : Colors.white,
+                                ? const Color(0xFF003366).withOpacity(0.8)
+                                : const Color(0xFF003366).withOpacity(0.02),
                           ),
                         ),
                       );
