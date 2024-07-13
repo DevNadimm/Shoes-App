@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../widgets/custom_app_bar.dart';
 import '../widgets/filters.dart';
+import '../widgets/product_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,6 +15,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             CustomAppBar(),
             const Filters(),
+            const ProductContainer(),
           ],
         ),
       ),
