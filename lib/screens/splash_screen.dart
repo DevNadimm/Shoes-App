@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/screens/home_screen.dart';
+import 'package:shop_app/screens/loading_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -56,7 +56,7 @@ class SplashScreen extends StatelessWidget {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => const HomeScreen(),
+                    builder: (_) => const LoadingScreen(),
                   ),
                 );
               },

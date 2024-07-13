@@ -13,7 +13,7 @@ final List<Map<String, dynamic>> products = [
   {
     'id': '1',
     'title': 'Women\'s Nike Shoes',
-    'price': 20.12,
+    'price': 58.12,
     'imageUrl': 'assets/images/nike2.png',
     'color': const Color(0xFF669900).withOpacity(0.1),
     'company': 'Nike',

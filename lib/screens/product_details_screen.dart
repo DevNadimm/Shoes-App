@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({
     super.key,
     required this.title,
@@ -13,6 +13,19 @@ class ProductDetailsScreen extends StatelessWidget {
   final String imgUrl;
   final String price;
   final List<int> sizes;
+
+  @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  late int isSelected;
+
+  @override
+  void initState() {
+    super.initState();
+    isSelected = widget.sizes[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +54,7 @@ class ProductDetailsScreen extends StatelessWidget {
         children: [
           Center(
             child: Text(
-              title,
+              widget.title,
               style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w600,
@@ -51,13 +64,13 @@ class ProductDetailsScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(10),
-            child: Image.asset(imgUrl),
+            child: Image.asset(widget.imgUrl),
           ),
           const Spacer(),
           Container(
             padding: const EdgeInsets.all(16),
             width: double.infinity,
-            height: 200,
+            height: 230,
             decoration: BoxDecoration(
               color: const Color(0xFF003366).withOpacity(0.1),
               borderRadius: const BorderRadius.vertical(
@@ -65,10 +78,10 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  '\$$price',
+                  '\$${widget.price}',
                   style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w600,
@@ -78,15 +91,25 @@ class ProductDetailsScreen extends StatelessWidget {
                 SizedBox(
                   height: 60,
                   child: ListView.builder(
-                    itemCount: sizes.length,
+                    itemCount: widget.sizes.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      final size = sizes[index];
+                      final size = widget.sizes[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Chip(
-                          label: Text(
-                            size.toString(),
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isSelected = size;
+                            });
+                          },
+                          child: Chip(
+                            label: Text(
+                              size.toString(),
+                            ),
+                            backgroundColor: isSelected == size
+                                ? const Color(0xFF003366).withOpacity(0.3)
+                                : Colors.white,
                           ),
                         ),
                       );
@@ -96,8 +119,9 @@ class ProductDetailsScreen extends StatelessWidget {
                 Container(
                   height: 50,
                   decoration: BoxDecoration(
-                      color: const Color(0xFF003366).withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(40)),
+                    color: const Color(0xFF003366).withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(40),
+                  ),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
