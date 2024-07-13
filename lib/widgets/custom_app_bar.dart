@@ -28,6 +28,7 @@ class CustomAppBar extends StatelessWidget {
               color: Color(0xFF003366),
               fontSize: 30,
               fontWeight: FontWeight.w700,
+              height: 1.2,
               fontFamily: 'Poppins',
             ),
           ),
