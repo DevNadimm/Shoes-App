@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shop_app/screens/product_list_screen.dart';
 import 'cart_screen.dart';
 
@@ -20,21 +21,24 @@ class _HomeScreenState extends State<HomeScreen> {
         index: currentIndex,
         children: screens,
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: SalomonBottomBar(
         currentIndex: currentIndex,
-        onTap: (value) {
+        onTap: (index) {
           setState(() {
-            currentIndex = value;
+            currentIndex = index;
           });
         },
-        selectedItemColor: Color(0xFF003366).withOpacity(0.8),
         items: [
-          BottomNavigationBarItem(
+          SalomonBottomBarItem(
             icon: Icon(Icons.home_filled),
-            label: 'Home',
+            title: Text("Home"),
+            selectedColor: Color(0xFF003366).withOpacity(0.8),
           ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag_rounded), label: 'Cart')
+          SalomonBottomBarItem(
+            icon: Icon(Icons.shopping_bag_rounded),
+            title: Text("Cart"),
+            selectedColor: Color(0xFF003366).withOpacity(0.8),
+          ),
         ],
       ),
     );
