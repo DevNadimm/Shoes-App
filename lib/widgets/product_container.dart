@@ -12,7 +12,6 @@ class ProductContainer extends StatelessWidget {
         itemCount: products.length,
         itemBuilder: (BuildContext context, int index) {
           final product = products[index];
-          final Color color = product['color'] as Color;
           return Padding(
             padding: const EdgeInsets.all(16),
             child: GestureDetector(
@@ -32,7 +31,9 @@ class ProductContainer extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  color: color,
+                  color: index % 2 == 0
+                      ? Color(0xFF003366).withOpacity(0.1)
+                      : Color(0xFF301934).withOpacity(0.1),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(12),
