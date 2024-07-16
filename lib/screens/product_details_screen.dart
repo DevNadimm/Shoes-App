@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/global_variables.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({
-    super.key,
+    Key? key,
     required this.title,
     required this.imgUrl,
     required this.price,
     required this.sizes,
-  });
+  }) : super(key: key);
 
   final String title;
   final String imgUrl;
@@ -25,6 +26,17 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   void initState() {
     super.initState();
     isSelected = widget.sizes[0];
+  }
+
+  void addToCart() {
+    setState(() {
+      carts.add({
+        'title': widget.title,
+        'price': double.parse(widget.price),
+        'imageUrl': widget.imgUrl,
+        'size': isSelected,
+      });
+    });
   }
 
   @override
@@ -115,7 +127,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                             side: BorderSide.none,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40)),
+                              borderRadius: BorderRadius.circular(40),
+                            ),
                             backgroundColor: isSelected == size
                                 ? const Color(0xFF003366).withOpacity(0.8)
                                 : const Color(0xFF003366).withOpacity(0.02),
@@ -125,31 +138,35 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     },
                   ),
                 ),
-                Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF003366).withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.shopping_cart,
-                        color: Colors.white,
+                Material(
+                  clipBehavior: Clip.antiAlias,
+                  color: const Color(0xFF003366).withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(40),
+                  child: InkWell(
+                    onTap: addToCart, // Call addToCart function here
+                    child: Container(
+                      height: 50,
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.shopping_cart,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 6,
+                          ),
+                          Text(
+                            'Add To Cart',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 18,
+                            ),
+                          )
+                        ],
                       ),
-                      SizedBox(
-                        width: 06,
-                      ),
-                      Text(
-                        'Add To Cart',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18,
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                 )
               ],
