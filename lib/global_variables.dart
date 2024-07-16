@@ -83,3 +83,22 @@ final List<Map<String, dynamic>> products = [
     'sizes': [7, 8, 9],
   },
 ];
+
+final List<Map<String, dynamic>> carts = [
+  {
+    'id': '1',
+    'title': 'Puma Sports Shoes',
+    'price': 97.50,
+    'imageUrl': 'assets/images/puma3.png',
+    'company': 'Puma',
+    'size': 8,
+  },
+  {
+    'id': '2',
+    'title': 'Nike Jordan Shoes',
+    'price': 44.52,
+    'imageUrl': 'assets/images/nike1.png',
+    'company': 'Nike',
+    'size': 10,
+  },
+];
