@@ -28,17 +28,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     isSelected = widget.sizes[0];
   }
 
-  void addToCart() {
-    setState(() {
-      carts.add({
-        'title': widget.title,
-        'price': double.parse(widget.price),
-        'imageUrl': widget.imgUrl,
-        'size': isSelected,
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,6 +162,40 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  void addToCart() {
+    final product = {
+      'title': widget.title,
+      'price': double.parse(widget.price),
+      'imageUrl': widget.imgUrl,
+      'size': isSelected,
+    };
+
+    setState(() {
+      carts.add(product);
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Product added successfully!'),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 3),
+        action: SnackBarAction(
+          label: 'Undo',
+          textColor: Colors.white,
+          onPressed: () {
+            setState(() {
+              carts.remove(product);
+            });
+          },
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        elevation: 6.0,
       ),
     );
   }
