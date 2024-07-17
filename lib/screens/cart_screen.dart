@@ -9,8 +9,24 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  double _totalPrice = 0.0;
+
   Future<void> _refreshCart() async {
-    setState(() {});
+    setState(() {
+      _calculateTotalPrice();
+    });
+  }
+
+  void _calculateTotalPrice() {
+    double totalPrice = 0.0;
+    for (Map<String, dynamic> cart in carts) {
+      if (cart.containsKey('price')) {
+        totalPrice += cart['price'];
+      }
+    }
+    setState(() {
+      _totalPrice = totalPrice;
+    });
   }
 
   @override
@@ -31,70 +47,142 @@ class _CartScreenState extends State<CartScreen> {
       body: RefreshIndicator(
         onRefresh: _refreshCart,
         child: carts.isNotEmpty
-            ? ListView.builder(
-                itemCount: carts.length,
-                itemBuilder: (context, index) {
-                  final cartItem = carts[index];
-                  return Card(
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: false,
+                      itemCount: carts.length,
+                      itemBuilder: (context, index) {
+                        final cartItem = carts[index];
+                        return Card(
+                          margin:
+                              EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: ListTile(
+                            contentPadding: EdgeInsets.all(12),
+                            leading: CircleAvatar(
+                              radius: 40,
+                              backgroundColor:
+                                  Color(0xFF003366).withOpacity(0.1),
+                              backgroundImage: AssetImage(cartItem['imageUrl']),
+                            ),
+                            title: Text(
+                              cartItem['title'],
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF003366),
+                              ),
+                            ),
+                            subtitle: Row(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Color(0xFF003366).withOpacity(0.07),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 3, horizontal: 6),
+                                  child: Text('Size: ${cartItem['size']}'),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Color(0xFF003366).withOpacity(0.07),
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 3, horizontal: 6),
+                                  child: Text('\$${cartItem['price']}'),
+                                ),
+                              ],
+                            ),
+                            trailing: IconButton(
+                              onPressed: () {
+                                _showDeleteDialog(context, index);
+                              },
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Card(
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     elevation: 4,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.all(12),
-                      leading: CircleAvatar(
-                        radius: 40,
-                        backgroundColor: Color(0xFF003366).withOpacity(0.1),
-                        backgroundImage: AssetImage(cartItem['imageUrl']),
+                    child: Container(
+                      padding: EdgeInsets.all(16),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(20)),
                       ),
-                      title: Text(
-                        cartItem['title'],
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF003366),
-                        ),
-                      ),
-                      subtitle: Row(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Color(0xFF003366).withOpacity(0.07),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Total',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xFF003366),
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              Text(
+                                '\$${_totalPrice.toStringAsFixed(2)}',
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    color: Color(0xFF003366),
+                                    fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Row(
+                              children: [
+                                Text(
+                                  'Checkout',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                Icon(
+                                  Icons.navigate_next,
+                                  color: Colors.white,
+                                  size: 27,
+                                )
+                              ],
                             ),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 3, horizontal: 6),
-                            child: Text('Size: ${cartItem['size']}'),
-                          ),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Color(0xFF003366).withOpacity(0.07),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Color(0xFF003366).withOpacity(0.8),
                             ),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 3, horizontal: 6),
-                            child: Text('\$${cartItem['price']}'),
-                          ),
+                          )
                         ],
                       ),
-                      trailing: IconButton(
-                        onPressed: () {
-                          _showDeleteDialog(context, index);
-                        },
-                        icon: Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                        ),
-                      ),
                     ),
-                  );
-                },
+                  )
+                ],
               )
             : Flexible(
                 child: Center(
@@ -138,7 +226,9 @@ class _CartScreenState extends State<CartScreen> {
           ),
           content: Text(
             'Are you sure you want to delete this item from your cart?',
-            style: TextStyle(color: Color(0xFF003366)),
+            style: TextStyle(
+              color: Color(0xFF003366),
+            ),
           ),
           actions: [
             TextButton(
@@ -154,6 +244,7 @@ class _CartScreenState extends State<CartScreen> {
               onPressed: () {
                 setState(() {
                   carts.removeAt(index);
+                  _calculateTotalPrice();
                   Navigator.of(context).pop();
                 });
               },
