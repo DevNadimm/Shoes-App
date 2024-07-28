@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shop_app/screens/product_list_screen.dart';
-import 'cart_screen.dart';
+import '../../screens/cart_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class BottomNavBar extends StatefulWidget {
+  const BottomNavBar({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _BottomNavBarState extends State<BottomNavBar> {
   List<Widget> screens = [ProductListScreen(), CartScreen()];
   int currentIndex = 0;
 
@@ -30,12 +30,12 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         items: [
           SalomonBottomBarItem(
-            icon: Icon(Icons.home_filled),
+            icon: Icon(Icons.home_rounded),
             title: Text("Home"),
             selectedColor: Color(0xFF003366).withOpacity(0.8),
           ),
           SalomonBottomBarItem(
-            icon: Icon(Icons.shopping_bag_rounded),
+            icon: Icon(Icons.shopping_cart_rounded),
             title: Text("Cart"),
             selectedColor: Color(0xFF003366).withOpacity(0.8),
           ),

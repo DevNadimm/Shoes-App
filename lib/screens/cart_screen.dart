@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../global_variables.dart';
+import 'package:shop_app/screens/checkout_screen.dart';
+import '../widgets/common/global_variables.dart';
+import '../widgets/checkout/selected_products_list.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -33,7 +35,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Cart',
           style: TextStyle(
             fontWeight: FontWeight.w600,
@@ -41,88 +43,33 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
         centerTitle: true,
-        elevation: 0,
-        iconTheme: IconThemeData(color: Color(0xFF003366)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Color(0xFF003366),
+          ),
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: _refreshCart,
+        color: Color(0xFF003366),
+        backgroundColor: Colors.grey.shade100,
+        strokeWidth: 3,
         child: carts.isNotEmpty
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
-                    child: ListView.builder(
-                      shrinkWrap: false,
-                      itemCount: carts.length,
-                      itemBuilder: (context, index) {
-                        final cartItem = carts[index];
-                        return Card(
-                          margin:
-                              EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: ListTile(
-                            contentPadding: EdgeInsets.all(12),
-                            leading: CircleAvatar(
-                              radius: 40,
-                              backgroundColor:
-                                  Color(0xFF003366).withOpacity(0.1),
-                              backgroundImage: AssetImage(cartItem['imageUrl']),
-                            ),
-                            title: Text(
-                              cartItem['title'],
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF003366),
-                              ),
-                            ),
-                            subtitle: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Color(0xFF003366).withOpacity(0.07),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 3, horizontal: 6),
-                                  child: Text('Size: ${cartItem['size']}'),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Color(0xFF003366).withOpacity(0.07),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 3, horizontal: 6),
-                                  child: Text('\$${cartItem['price']}'),
-                                ),
-                              ],
-                            ),
-                            trailing: IconButton(
-                              onPressed: () {
-                                _showDeleteDialog(context, index);
-                              },
-                              icon: Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                      child: SelectedProductsList(
+                    onTap: _showDeleteDialog,
+                    showDeleteButton: true,
+                  )),
                   Card(
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                    elevation: 4,
+                    elevation: 1.5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -156,22 +103,22 @@ class _CartScreenState extends State<CartScreen> {
                             ],
                           ),
                           ElevatedButton(
-                            onPressed: () {},
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Checkout',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => CheckoutScreen(
+                                    subTotal: _totalPrice,
+                                  ),
                                 ),
-                                Icon(
-                                  Icons.navigate_next,
+                              );
+                            },
+                            child: Text(
+                              'Checkout',
+                              style: TextStyle(
+                                  fontSize: 18,
                                   color: Colors.white,
-                                  size: 27,
-                                )
-                              ],
+                                  fontWeight: FontWeight.w600),
                             ),
                             style: ElevatedButton.styleFrom(
                               backgroundColor:

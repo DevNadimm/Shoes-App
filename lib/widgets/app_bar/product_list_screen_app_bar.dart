@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomAppBar extends StatelessWidget {
-  CustomAppBar({super.key});
+class ProductListScreenAppBar extends StatelessWidget {
+  ProductListScreenAppBar({super.key});
 
   final OutlineInputBorder border = OutlineInputBorder(
     borderRadius: const BorderRadius.horizontal(
@@ -36,18 +36,18 @@ class CustomAppBar extends StatelessWidget {
         Expanded(
           child: TextField(
             decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: const Color(0xFF003366).withOpacity(0.7),
-                ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: const Color(0xFF003366).withOpacity(0.7),
-                ),
-                border: border,
-                focusedBorder: border,
-                enabledBorder: border,
+              hintText: 'Search',
+              hintStyle: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF003366).withOpacity(0.7),
+              ),
+              prefixIcon: Icon(
+                Icons.search,
+                color: const Color(0xFF003366).withOpacity(0.7),
+              ),
+              border: border,
+              focusedBorder: border,
+              enabledBorder: border,
             ),
           ),
         ),

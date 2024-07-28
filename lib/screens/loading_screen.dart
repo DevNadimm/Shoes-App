@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'home_screen.dart';
+import '../widgets/nav/bottom_nav_bar.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -13,20 +12,21 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (context) => const BottomNavBar()),
       );
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0XFF171214),
+    return Scaffold(
+      backgroundColor: Colors.white,
       body: Center(
         child: CircularProgressIndicator(
-          color: Colors.white,
+          color: Color(0xFF003366),
+          backgroundColor: Colors.grey.shade100,
         ),
       ),
     );

@@ -14,11 +14,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Shoes App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF003366)),
         useMaterial3: true,
       ),
-      home: const SplashScreen(
-      ),
+      home: const SplashScreen(),
     );
   }
 }

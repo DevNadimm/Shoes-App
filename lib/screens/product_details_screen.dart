@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/global_variables.dart';
+import 'package:shop_app/widgets/common/global_variables.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({
@@ -54,12 +54,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Center(
-            child: Text(
-              widget.title,
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF003366),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                widget.title,
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF003366),
+                ),
               ),
             ),
           ),
@@ -193,7 +196,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           },
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          ),
         ),
         elevation: 6.0,
       ),
