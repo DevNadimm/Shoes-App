@@ -3,14 +3,14 @@ import 'package:shop_app/widgets/common/global_variables.dart';
 import 'package:shop_app/screens/product_details_screen.dart';
 import '../widgets/app_bar/product_list_screen_app_bar.dart';
 
-class ProductListScreen extends StatefulWidget {
-  const ProductListScreen({super.key});
+class ShoesCollectionScreen extends StatefulWidget {
+  const ShoesCollectionScreen({super.key});
 
   @override
-  State<ProductListScreen> createState() => _ProductListScreenState();
+  State<ShoesCollectionScreen> createState() => _ShoesCollectionScreenState();
 }
 
-class _ProductListScreenState extends State<ProductListScreen> {
+class _ShoesCollectionScreenState extends State<ShoesCollectionScreen> {
   final List<String> filterList = const [
     'All',
     'Nike',

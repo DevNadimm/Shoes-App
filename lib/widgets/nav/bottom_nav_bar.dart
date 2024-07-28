@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:shop_app/screens/product_list_screen.dart';
+import 'package:shop_app/screens/shoes_collection_screen.dart';
 import '../../screens/cart_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -11,7 +11,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  List<Widget> screens = [ProductListScreen(), CartScreen()];
+  List<Widget> screens = [ShoesCollectionScreen(), CartScreen()];
   int currentIndex = 0;
 
   @override
