@@ -18,7 +18,7 @@ const TextStyle changeTextStyle = TextStyle(
   color: primaryColor,
 );
 
-class SummarySection extends StatelessWidget {
+class SummarySection extends StatefulWidget {
   final double subTotal;
   final double shippingCost;
   final double taxAmount;
@@ -32,6 +32,76 @@ class SummarySection extends StatelessWidget {
     required this.discount,
     required this.orderTotal,
   });
+
+  @override
+  State<SummarySection> createState() => _SummarySectionState();
+}
+
+class _SummarySectionState extends State<SummarySection> {
+  String _selectedPaymentMethod = 'Google Pay';
+  String _selectedPaymentImage = 'assets/images/gPay.png';
+
+  void _changePaymentMethod() async {
+    final result = await showDialog<Map<String, String>>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: Text(
+            'Select Payment Method',
+            style: TextStyle(
+                fontWeight: FontWeight.w600, color: Color(0xFF003366)),
+          ),
+          children: [
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, {
+                  'method': 'Google Pay',
+                  'image': 'assets/images/gPay.png'
+                });
+              },
+              child: PaymentMethodRow(
+                  imagePath: 'assets/images/gPay.png',
+                  methodName: 'Google Pay'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, {
+                  'method': 'Credit Card',
+                  'image': 'assets/images/credit_card.png'
+                });
+              },
+              child: PaymentMethodRow(
+                  imagePath: 'assets/images/credit_card.png',
+                  methodName: 'Credit Card'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context,
+                    {'method': 'BKash', 'image': 'assets/images/BKash.png'});
+              },
+              child: PaymentMethodRow(
+                  imagePath: 'assets/images/BKash.png', methodName: 'BKash'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context,
+                    {'method': 'Nagad', 'image': 'assets/images/Nagad.png'});
+              },
+              child: PaymentMethodRow(
+                  imagePath: 'assets/images/Nagad.png', methodName: 'Nagad'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (result != null) {
+      setState(() {
+        _selectedPaymentMethod = result['method']!;
+        _selectedPaymentImage = result['image']!;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,29 +120,29 @@ class SummarySection extends StatelessWidget {
         children: [
           CheckoutContainerRow(
             label: 'Subtotal',
-            value: '\$${subTotal.toStringAsFixed(2)}',
+            value: '\$${widget.subTotal.toStringAsFixed(2)}',
           ),
           const SizedBox(height: 5),
           CheckoutContainerRow(
             label: 'Shipping',
-            value: '\$${shippingCost.toStringAsFixed(2)}',
+            value: '\$${widget.shippingCost.toStringAsFixed(2)}',
           ),
           const SizedBox(height: 5),
           CheckoutContainerRow(
             label: 'Tax',
-            value: '\$${taxAmount.toStringAsFixed(2)}',
+            value: '\$${widget.taxAmount.toStringAsFixed(2)}',
           ),
           const SizedBox(height: 5),
           CheckoutContainerRow(
             label: 'Discount',
-            value: '-\$${discount.toStringAsFixed(2)}',
+            value: '-\$${widget.discount.toStringAsFixed(2)}',
           ),
           const SizedBox(height: padding),
           Divider(color: primaryColor.withOpacity(0.3), thickness: 2),
           const SizedBox(height: padding),
           CheckoutContainerRow(
             label: 'Total',
-            value: '\$${orderTotal.toStringAsFixed(2)}',
+            value: '\$${widget.orderTotal.toStringAsFixed(2)}',
           ),
           const SizedBox(height: padding),
           Divider(color: primaryColor.withOpacity(0.3), thickness: 2),
@@ -81,14 +151,19 @@ class SummarySection extends StatelessWidget {
             title: 'Payment Method',
             action: 'Change',
             actionOpacity: 0.8,
+            onTap: _changePaymentMethod,
           ),
           const SizedBox(height: largePadding),
-          PaymentMethodRow(),
+          PaymentMethodRow(
+            imagePath: _selectedPaymentImage,
+            methodName: _selectedPaymentMethod,
+          ),
           const SizedBox(height: largePadding),
           SectionRow(
             title: 'Shipping Address',
             action: 'Change',
             actionOpacity: 0.8,
+            onTap: () {},
           ),
           const SizedBox(height: smallPadding),
           ShippingAddress(),
@@ -102,11 +177,13 @@ class SectionRow extends StatelessWidget {
   final String title;
   final String action;
   final double actionOpacity;
+  final VoidCallback onTap;
 
   SectionRow({
     required this.title,
     required this.action,
     required this.actionOpacity,
+    required this.onTap,
   });
 
   @override
@@ -119,7 +196,7 @@ class SectionRow extends StatelessWidget {
           style: sectionTitleStyle,
         ),
         GestureDetector(
-          onTap: (){},
+          onTap: onTap,
           child: Text(
             action,
             style: changeTextStyle.copyWith(
@@ -133,17 +210,25 @@ class SectionRow extends StatelessWidget {
 }
 
 class PaymentMethodRow extends StatelessWidget {
+  final String imagePath;
+  final String methodName;
+
+  PaymentMethodRow({required this.imagePath, required this.methodName});
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.asset(
-          'assets/images/gPay.png',
-          scale: 20,
+        SizedBox(
+          width: 27,
+          child: Image.asset(
+            imagePath,
+            scale: 20,
+          ),
         ),
         const SizedBox(width: 8),
         Text(
-          'Google Pay',
+          methodName,
           style: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 15,
