@@ -110,7 +110,9 @@ class _ShippingAddressState extends State<ShippingAddress> {
                       child: Text(
                         'Update',
                         style: const TextStyle(
-                            fontWeight: FontWeight.w700, fontSize: 17,),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 17,
+                        ),
                       ),
                     ),
                   ),
@@ -136,7 +138,7 @@ class _ShippingAddressState extends State<ShippingAddress> {
             _showBottomSheet(context);
           },
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 16),
         Row(
           children: [
             Icon(

@@ -8,7 +8,6 @@ import 'package:shop_app/widgets/checkout/shipping_address.dart';
 const Color primaryColor = Color(0xFF003366);
 const double padding = 16.0;
 const double smallPadding = 8.0;
-const double largePadding = 20.0;
 
 class SummarySection extends StatefulWidget {
   final double subTotal;
@@ -84,12 +83,12 @@ class _SummarySectionState extends State<SummarySection> {
             label: 'Discount',
             value: '-\$${widget.discount.toStringAsFixed(2)}',
           ),
-          const SizedBox(height: padding),
-          Divider(color: primaryColor.withOpacity(0.3), thickness: 2),
-          const SizedBox(height: padding),
-          CheckoutContainerRow(
-            label: 'Total',
-            value: '\$${widget.orderTotal.toStringAsFixed(2)}',
+          const SizedBox(height: smallPadding),
+          SectionRow(
+            title: 'Total',
+            action: '\$${widget.orderTotal.toStringAsFixed(2)}',
+            actionOpacity: 1,
+            onTap: () {},
           ),
           const SizedBox(height: padding),
           Divider(color: primaryColor.withOpacity(0.3), thickness: 2),
@@ -100,12 +99,12 @@ class _SummarySectionState extends State<SummarySection> {
             actionOpacity: 0.8,
             onTap: _showPaymentMethodBottomSheet,
           ),
-          const SizedBox(height: largePadding),
+          const SizedBox(height: padding),
           PaymentMethodRow(
             imagePath: _selectedPaymentImage,
             methodName: _selectedPaymentMethod,
           ),
-          const SizedBox(height: largePadding),
+          const SizedBox(height: padding),
           ShippingAddress(),
         ],
       ),
