@@ -119,7 +119,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             ),
                             side: BorderSide.none,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
+                              borderRadius: BorderRadius.circular(12),
                             ),
                             backgroundColor: isSelected == size
                                 ? const Color(0xFF003366).withOpacity(0.8)

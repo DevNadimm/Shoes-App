@@ -123,6 +123,9 @@ class _CartScreenState extends State<CartScreen> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor:
                                   Color(0xFF003366).withOpacity(0.8),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
                           )
                         ],

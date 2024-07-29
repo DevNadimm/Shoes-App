@@ -77,7 +77,7 @@ class _ShoesCollectionScreenState extends State<ShoesCollectionScreen> {
                       ),
                       side: BorderSide.none,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       backgroundColor: selectedFilter == filter
                           ? const Color(0xFF003366).withOpacity(0.8)
