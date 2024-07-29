@@ -137,7 +137,7 @@ class _ShoesCollectionScreenState extends State<ShoesCollectionScreen> {
                                   : Color(0xFF301934).withOpacity(0.1),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(15),
+                              padding: const EdgeInsets.all(12),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
