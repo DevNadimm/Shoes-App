@@ -5,7 +5,7 @@ final List<Map<String, dynamic>> products = [
     'price': 123.74,
     'imageUrl': 'assets/images/nike1.png',
     'company': 'Nike',
-    'sizes': [9, 10, 11, 12],
+    'sizes': [09, 10, 11, 12],
   },
   {
     'id': '1',
@@ -13,7 +13,7 @@ final List<Map<String, dynamic>> products = [
     'price': 58.12,
     'imageUrl': 'assets/images/nike2.png',
     'company': 'Nike',
-    'sizes': [9, 10, 12],
+    'sizes': [08, 10, 12],
   },
   {
     'id': '2',
@@ -21,7 +21,7 @@ final List<Map<String, dynamic>> products = [
     'price': 62.10,
     'imageUrl': 'assets/images/adidas1.png',
     'company': 'Adidas',
-    'sizes': [7, 8, 9, 10],
+    'sizes': [07, 08, 09, 10],
   },
   {
     'id': '3',
@@ -29,7 +29,7 @@ final List<Map<String, dynamic>> products = [
     'price': 78.99,
     'imageUrl': 'assets/images/nike3.png',
     'company': 'Nike',
-    'sizes': [8, 9, 10, 11],
+    'sizes': [08, 09, 10, 11],
   },
   {
     'id': '4',
@@ -37,7 +37,7 @@ final List<Map<String, dynamic>> products = [
     'price': 78.45,
     'imageUrl': 'assets/images/puma2.png',
     'company': 'Puma',
-    'sizes': [8, 9, 10, 13],
+    'sizes': [08, 09, 10, 13],
   },
   {
     'id': '5',
@@ -45,7 +45,7 @@ final List<Map<String, dynamic>> products = [
     'price': 97.50,
     'imageUrl': 'assets/images/nike4.png',
     'company': 'Nike',
-    'sizes': [7, 8, 9],
+    'sizes': [07, 08, 12, 13],
   },
   {
     'id': '6',
@@ -53,7 +53,7 @@ final List<Map<String, dynamic>> products = [
     'price': 48.00,
     'imageUrl': 'assets/images/puma1.png',
     'company': 'Puma',
-    'sizes': [6, 7, 8, 9, 11],
+    'sizes': [07, 08, 09, 11, 12],
   },
   {
     'id': '7',
@@ -61,7 +61,7 @@ final List<Map<String, dynamic>> products = [
     'price': 38.78,
     'imageUrl': 'assets/images/bata1.png',
     'company': 'Bata',
-    'sizes': [8, 10, 11, 13],
+    'sizes': [08, 10, 11, 13],
   },
   {
     'id': '8',
@@ -69,7 +69,7 @@ final List<Map<String, dynamic>> products = [
     'price': 93.69,
     'imageUrl': 'assets/images/puma3.png',
     'company': 'Puma',
-    'sizes': [7, 8, 9, 11],
+    'sizes': [08, 09, 11, 10],
   },
   {
     'id': '9',
@@ -77,7 +77,7 @@ final List<Map<String, dynamic>> products = [
     'price': 62.12,
     'imageUrl': 'assets/images/bata2.png',
     'company': 'Bata',
-    'sizes': [7, 9, 11, 12],
+    'sizes': [07, 09, 11, 12],
   },
   {
     'id': '10',
@@ -85,7 +85,7 @@ final List<Map<String, dynamic>> products = [
     'price': 37.85,
     'imageUrl': 'assets/images/adidas2.png',
     'company': 'Adidas',
-    'sizes': [6, 7, 8, 9],
+    'sizes': [08, 09, 10, 11, 13],
   },
 ];
 
