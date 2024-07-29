@@ -4,6 +4,7 @@ import 'package:shop_app/widgets/checkout/selected_products_list.dart';
 import 'package:shop_app/widgets/checkout/discount_field.dart';
 import '../widgets/checkout/location_selector.dart';
 import '../widgets/checkout/summary_section.dart';
+import '../widgets/common/custom_elevated_button.dart';
 
 class CheckoutScreen extends StatefulWidget {
   CheckoutScreen({Key? key, required this.subTotal}) : super(key: key);
@@ -99,31 +100,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-              child: SizedBox(
+              child: CustomElevatedButton(
+                label: 'Checkout \$${getOrderTotal().toStringAsFixed(2)}',
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => PaymentSuccessScreen()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: const Color(0xFF003366).withOpacity(0.8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => PaymentSuccessScreen(),
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(13),
-                    child: Text(
-                      'Checkout \$${getOrderTotal().toStringAsFixed(2)}',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700, fontSize: 17),
-                    ),
-                  ),
-                ),
+                  );
+                },
               ),
             ),
           ],

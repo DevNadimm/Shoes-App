@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
+import '../widgets/common/custom_elevated_button.dart';
 import '../widgets/nav/bottom_nav_bar.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class PaymentSuccessScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Lottie.asset('assets/anim/payment_success_anim.json',height: 200),
+            Lottie.asset('assets/anim/payment_success_anim.json', height: 200),
             Text(
               'Payment Success!',
               style: TextStyle(
@@ -24,7 +24,9 @@ class PaymentSuccessScreen extends StatelessWidget {
                 color: Color(0xFF003366),
               ),
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Text(
               'Your product will be shipped soon!',
               style: TextStyle(
@@ -33,37 +35,20 @@ class PaymentSuccessScreen extends StatelessWidget {
                 color: Color(0xFF003366).withOpacity(0.7),
               ),
             ),
-            SizedBox(height: 20,),
             SizedBox(
-              width: 300,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> BottomNavBar()));},
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all<Color>(
-                          Color(0xFF003366).withOpacity(0.8)),
-                      foregroundColor:
-                      WidgetStateProperty.all<Color>(Colors.white),
-                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(13),
-                      child: Text(
-                        'Continue Shopping',
-                        style:
-                        TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
-                      ),
-                    ),
+              height: 20,
+            ),
+            CustomElevatedButton(
+              label: 'Continue Shopping',
+              width: 250,
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BottomNavBar(),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ],
         ),

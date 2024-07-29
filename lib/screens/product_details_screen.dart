@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/widgets/common/global_variables.dart';
 
+import '../widgets/common/custom_elevated_button.dart';
+
 class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({
     Key? key,
@@ -100,7 +102,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     itemBuilder: (context, index) {
                       final size = widget.sizes[index];
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        padding: const EdgeInsets.only(right: 8),
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
@@ -130,37 +132,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     },
                   ),
                 ),
-                Material(
-                  clipBehavior: Clip.antiAlias,
-                  color: const Color(0xFF003366).withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(40),
-                  child: InkWell(
-                    onTap: addToCart, // Call addToCart function here
-                    child: Container(
-                      height: 50,
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.shopping_cart,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 6,
-                          ),
-                          Text(
-                            'Add To Cart',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                )
+                CustomElevatedButton(
+                  label: 'Add To Cart',
+                  onTap: addToCart,
+                  icon: Icons.shopping_cart,
+                ),
               ],
             ),
           )

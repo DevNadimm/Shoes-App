@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/screens/checkout_screen.dart';
+import 'package:shop_app/widgets/common/custom_elevated_button.dart';
 import '../widgets/common/global_variables.dart';
 import '../widgets/checkout/selected_products_list.dart';
 
@@ -76,10 +77,6 @@ class _CartScreenState extends State<CartScreen> {
                     child: Container(
                       padding: EdgeInsets.all(16),
                       width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(20)),
-                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -102,8 +99,10 @@ class _CartScreenState extends State<CartScreen> {
                               )
                             ],
                           ),
-                          ElevatedButton(
-                            onPressed: () {
+                          CustomElevatedButton(
+                            label: 'Checkout',
+                            width: 140,
+                            onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -113,20 +112,6 @@ class _CartScreenState extends State<CartScreen> {
                                 ),
                               );
                             },
-                            child: Text(
-                              'Checkout',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  Color(0xFF003366).withOpacity(0.8),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
                           )
                         ],
                       ),

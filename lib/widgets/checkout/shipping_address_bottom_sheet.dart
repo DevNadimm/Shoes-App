@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/widgets/common/custom_elevated_button.dart';
 
 class ShippingAddressBottomSheet extends StatefulWidget {
   final String initialName;
@@ -122,29 +123,7 @@ class _ShippingAddressBottomSheetState
                 hintText: 'Address',
                 prefixIcon: Icons.location_on_rounded),
             const SizedBox(height: 10),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: updateInfo,
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: const Color(0xFF003366).withOpacity(0.8),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(13),
-                  child: Text(
-                    'Update',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            CustomElevatedButton(label: 'Update', onTap: updateInfo)
           ],
         ),
       ),

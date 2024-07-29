@@ -131,7 +131,7 @@ class _ShoesCollectionScreenState extends State<ShoesCollectionScreen> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(15),
                               color: index % 2 == 0
                                   ? Color(0xFF003366).withOpacity(0.1)
                                   : Color(0xFF301934).withOpacity(0.1),
@@ -161,7 +161,7 @@ class _ShoesCollectionScreenState extends State<ShoesCollectionScreen> {
                                       Container(
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(5),
+                                              BorderRadius.circular(6),
                                           color: Color(0xFFFFFFFF)
                                               .withOpacity(0.8),
                                         ),
