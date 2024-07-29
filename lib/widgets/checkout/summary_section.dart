@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/widgets/checkout/checkout_container_row.dart';
+import 'package:shop_app/widgets/checkout/payment_method_bottom_sheet.dart';
 import 'package:shop_app/widgets/checkout/payment_method_row.dart';
 import 'package:shop_app/widgets/checkout/section_row.dart';
 import 'package:shop_app/widgets/checkout/shipping_address.dart';
@@ -32,66 +33,21 @@ class _SummarySectionState extends State<SummarySection> {
   String _selectedPaymentMethod = 'Google Pay';
   String _selectedPaymentImage = 'assets/images/gPay.png';
 
-  void _changePaymentMethod() async {
-    final result = await showDialog<Map<String, String>>(
+  void _showPaymentMethodBottomSheet() async {
+    final result = await showModalBottomSheet<Map<String, String>>(
       context: context,
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        return SimpleDialog(
-          title: Text(
-            'Select Payment Method',
-            style: TextStyle(
-                fontWeight: FontWeight.w600, color: Color(0xFF003366)),
-          ),
-          children: [
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context, {
-                  'method': 'Google Pay',
-                  'image': 'assets/images/gPay.png'
-                });
-              },
-              child: PaymentMethodRow(
-                  imagePath: 'assets/images/gPay.png',
-                  methodName: 'Google Pay'),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context, {
-                  'method': 'Credit Card',
-                  'image': 'assets/images/credit_card.png'
-                });
-              },
-              child: PaymentMethodRow(
-                  imagePath: 'assets/images/credit_card.png',
-                  methodName: 'Credit Card'),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context,
-                    {'method': 'BKash', 'image': 'assets/images/BKash.png'});
-              },
-              child: PaymentMethodRow(
-                  imagePath: 'assets/images/BKash.png', methodName: 'BKash'),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context,
-                    {'method': 'Nagad', 'image': 'assets/images/Nagad.png'});
-              },
-              child: PaymentMethodRow(
-                  imagePath: 'assets/images/Nagad.png', methodName: 'Nagad'),
-            ),
-          ],
+        return PaymentMethodBottomSheet(
+          onSelectMethod: (selectedMethod) {
+            setState(() {
+              _selectedPaymentMethod = selectedMethod['method']!;
+              _selectedPaymentImage = selectedMethod['image']!;
+            });
+          },
         );
       },
     );
-
-    if (result != null) {
-      setState(() {
-        _selectedPaymentMethod = result['method']!;
-        _selectedPaymentImage = result['image']!;
-      });
-    }
   }
 
   @override
@@ -142,7 +98,7 @@ class _SummarySectionState extends State<SummarySection> {
             title: 'Payment Method',
             action: 'Change',
             actionOpacity: 0.8,
-            onTap: _changePaymentMethod,
+            onTap: _showPaymentMethodBottomSheet,
           ),
           const SizedBox(height: largePadding),
           PaymentMethodRow(
