@@ -46,26 +46,6 @@ class _ShippingAddressBottomSheetState
     super.dispose();
   }
 
-  InputDecoration commonDecoration(String hintText) {
-    return InputDecoration(
-      hintText: hintText,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide.none,
-      ),
-      fillColor: Color(0xFF003366).withOpacity(0.1),
-      filled: true,
-    );
-  }
-
   void updateInfo() {
     widget.onUpdate(
       nameController.text,
@@ -79,10 +59,31 @@ class _ShippingAddressBottomSheetState
   Widget _textField({
     required TextEditingController controller,
     required String hintText,
+    IconData? prefixIcon,
   }) {
     return TextField(
       controller: controller,
-      decoration: commonDecoration(hintText),
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          prefixIcon,
+          color: Color(0xFF003366).withOpacity(0.8),
+        ),
+        hintText: hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        fillColor: Color(0xFF003366).withOpacity(0.1),
+        filled: true,
+      ),
       style: TextStyle(
         color: const Color(0xFF003366),
         fontWeight: FontWeight.w600,
@@ -102,24 +103,24 @@ class _ShippingAddressBottomSheetState
           mainAxisSize: MainAxisSize.min,
           children: [
             _textField(
-              controller: nameController,
-              hintText: 'Name',
-            ),
+                controller: nameController,
+                hintText: 'Name',
+                prefixIcon: Icons.person_rounded),
             const SizedBox(height: 10),
             _textField(
-              controller: phoneController,
-              hintText: 'Phone Number',
-            ),
+                controller: phoneController,
+                hintText: 'Phone Number',
+                prefixIcon: Icons.call_rounded),
             const SizedBox(height: 10),
             _textField(
-              controller: emailController,
-              hintText: 'Email',
-            ),
+                controller: emailController,
+                hintText: 'Email',
+                prefixIcon: Icons.email_rounded),
             const SizedBox(height: 10),
             _textField(
-              controller: addressController,
-              hintText: 'Address',
-            ),
+                controller: addressController,
+                hintText: 'Address',
+                prefixIcon: Icons.location_on_rounded),
             const SizedBox(height: 10),
             SizedBox(
               width: double.infinity,

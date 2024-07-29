@@ -13,7 +13,7 @@ class ShippingAddressRow extends StatelessWidget {
         Icon(
           icon,
           color: Color(0xFF003366).withOpacity(0.8),
-          size: 17,
+          size: 18,
         ),
         const SizedBox(width: 15),
         Expanded(
