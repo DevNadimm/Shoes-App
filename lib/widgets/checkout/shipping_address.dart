@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/widgets/checkout/section_row.dart';
+import 'package:shop_app/widgets/checkout/shipping_address_bottom_sheet.dart';
+import 'package:shop_app/widgets/checkout/shipping_address_row.dart';
 
 class ShippingAddress extends StatefulWidget {
   @override
@@ -12,30 +14,6 @@ class _ShippingAddressState extends State<ShippingAddress> {
   String address =
       'Green Haven Hills, Road No. 12, Green Valley, Chittagong, Bangladesh';
   String email = 'nadim@gmail.com';
-
-  final nameController = TextEditingController();
-  final phoneController = TextEditingController();
-  final addressController = TextEditingController();
-  final emailController = TextEditingController();
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    phoneController.dispose();
-    addressController.dispose();
-    emailController.dispose();
-    super.dispose();
-  }
-
-  void updateInfo() {
-    setState(() {
-      name = nameController.text.isNotEmpty ? nameController.text : name;
-      phone = phoneController.text.isNotEmpty ? phoneController.text : phone;
-      address =
-          addressController.text.isNotEmpty ? addressController.text : address;
-      email = emailController.text.isNotEmpty ? emailController.text : email;
-    });
-  }
 
   InputDecoration commonDecoration(String hintText) {
     return InputDecoration(
@@ -62,64 +40,19 @@ class _ShippingAddressState extends State<ShippingAddress> {
       context: context,
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: nameController,
-                  decoration: commonDecoration('Name'),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: phoneController,
-                  decoration: commonDecoration('Phone Number'),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: emailController,
-                  decoration: commonDecoration('Email'),
-                ),
-                const SizedBox(height: 10),
-                TextField(
-                  controller: addressController,
-                  decoration: commonDecoration('Address'),
-                ),
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      updateInfo();
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: const Color(0xFF003366).withOpacity(0.8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(13),
-                      child: Text(
-                        'Update',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+        return ShippingAddressBottomSheet(
+          initialName: name,
+          initialPhone: phone,
+          initialEmail: email,
+          initialAddress: address,
+          onUpdate: (newName, newPhone, newEmail, newAddress) {
+            setState(() {
+              name = newName;
+              phone = newPhone;
+              email = newEmail;
+              address = newAddress;
+            });
+          },
         );
       },
     );
@@ -128,7 +61,6 @@ class _ShippingAddressState extends State<ShippingAddress> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionRow(
           title: 'Shipping Address',
@@ -139,83 +71,13 @@ class _ShippingAddressState extends State<ShippingAddress> {
           },
         ),
         const SizedBox(height: 16),
-        Row(
-          children: [
-            Icon(
-              Icons.person,
-              color: Color(0xFF003366).withOpacity(0.8),
-              size: 17,
-            ),
-            const SizedBox(width: 15),
-            Text(
-              name,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 15,
-                color: Color(0xFF003366),
-              ),
-            ),
-          ],
-        ),
+        ShippingAddressRow(value: name, icon: Icons.person_rounded),
         const SizedBox(height: 5),
-        Row(
-          children: [
-            Icon(
-              Icons.call,
-              color: Color(0xFF003366).withOpacity(0.8),
-              size: 17,
-            ),
-            const SizedBox(width: 15),
-            Text(
-              phone,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 15,
-                color: Color(0xFF003366),
-              ),
-            ),
-          ],
-        ),
+        ShippingAddressRow(value: phone, icon: Icons.call_rounded),
         const SizedBox(height: 5),
-        Row(
-          children: [
-            Icon(
-              Icons.email,
-              color: Color(0xFF003366).withOpacity(0.8),
-              size: 17,
-            ),
-            const SizedBox(width: 15),
-            Text(
-              email,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 15,
-                color: Color(0xFF003366),
-              ),
-            ),
-          ],
-        ),
+        ShippingAddressRow(value: email, icon: Icons.email_rounded),
         const SizedBox(height: 5),
-        Row(
-          children: [
-            Icon(
-              Icons.location_on,
-              color: Color(0xFF003366).withOpacity(0.8),
-              size: 17,
-            ),
-            const SizedBox(width: 15),
-            Expanded(
-              child: Text(
-                address,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
-                  color: Color(0xFF003366),
-                ),
-              ),
-            ),
-          ],
-        ),
+        ShippingAddressRow(value: address, icon: Icons.location_on_rounded),
       ],
     );
   }
