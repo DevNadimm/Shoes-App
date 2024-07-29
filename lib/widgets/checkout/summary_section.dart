@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/widgets/checkout/checkout_container_row.dart';
+import 'package:shop_app/widgets/checkout/payment_method_row.dart';
+import 'package:shop_app/widgets/checkout/section_row.dart';
+import 'package:shop_app/widgets/checkout/shipping_address.dart';
 
 const Color primaryColor = Color(0xFF003366);
 const double padding = 16.0;
 const double smallPadding = 8.0;
 const double largePadding = 20.0;
-
-const TextStyle sectionTitleStyle = TextStyle(
-  fontWeight: FontWeight.w700,
-  fontSize: 19,
-  color: primaryColor,
-);
-
-const TextStyle changeTextStyle = TextStyle(
-  fontWeight: FontWeight.w600,
-  fontSize: 15,
-  color: primaryColor,
-);
 
 class SummarySection extends StatefulWidget {
   final double subTotal;
@@ -159,142 +150,9 @@ class _SummarySectionState extends State<SummarySection> {
             methodName: _selectedPaymentMethod,
           ),
           const SizedBox(height: largePadding),
-          SectionRow(
-            title: 'Shipping Address',
-            action: 'Change',
-            actionOpacity: 0.8,
-            onTap: () {},
-          ),
-          const SizedBox(height: smallPadding),
           ShippingAddress(),
         ],
       ),
-    );
-  }
-}
-
-class SectionRow extends StatelessWidget {
-  final String title;
-  final String action;
-  final double actionOpacity;
-  final VoidCallback onTap;
-
-  SectionRow({
-    required this.title,
-    required this.action,
-    required this.actionOpacity,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: sectionTitleStyle,
-        ),
-        GestureDetector(
-          onTap: onTap,
-          child: Text(
-            action,
-            style: changeTextStyle.copyWith(
-              color: primaryColor.withOpacity(actionOpacity),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class PaymentMethodRow extends StatelessWidget {
-  final String imagePath;
-  final String methodName;
-
-  PaymentMethodRow({required this.imagePath, required this.methodName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 27,
-          child: Image.asset(
-            imagePath,
-            scale: 20,
-          ),
-        ),
-        const SizedBox(width: 8),
-        Text(
-          methodName,
-          style: TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 15,
-            color: primaryColor,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class ShippingAddress extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Nadim Chowdhury',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            color: primaryColor,
-            fontSize: 15,
-          ),
-        ),
-        const SizedBox(height: 5),
-        Row(
-          children: [
-            Icon(
-              Icons.call,
-              color: primaryColor.withOpacity(0.8),
-              size: 17,
-            ),
-            const SizedBox(width: 15),
-            Text(
-              '+8801944557101',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 15,
-                color: primaryColor,
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 5),
-        Row(
-          children: [
-            Icon(
-              Icons.location_on,
-              color: primaryColor.withOpacity(0.8),
-              size: 17,
-            ),
-            const SizedBox(width: 15),
-            Expanded(
-              child: Text(
-                'Green Haven Hills, Road No. 12, Green Valley, Chittagong, Bangladesh',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 15,
-                  color: primaryColor,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }
