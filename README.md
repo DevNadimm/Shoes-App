@@ -45,11 +45,6 @@ To get a local copy up and running follow these simple steps.
     flutter run
     ```
 
-## Requirements
-
-- **Flutter SDK**: Make sure you have Flutter installed on your machine. You can download it from [here](https://flutter.dev/docs/get-started/install).
-- **Dart SDK**: Dart is included in the Flutter SDK, so you don’t need to install it separately.
-
 ## Contact
 
 If you have any questions, feel free to reach out:
