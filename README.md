@@ -1,14 +1,18 @@
 # Shoes-App
 
-Shoes-App is a Flutter-based e-commerce application with a strong focus on user interface. It provides multiple functional screens to enhance the shopping experience. This app does not include backend implementation.
+Shoes-App is a Flutter-based e-commerce application with a strong focus on user interface. It
+provides multiple functional screens to enhance the shopping experience. This app does not include
+backend implementation.
 
 ## Features
 
 - **Splash Screen:** Welcome screen displayed when the app is launched.
-- **Shoes Collection Screen:** Displays a collection of shoes with multiple filters based on brands like Nike, Adidas.
+- **Shoes Collection Screen:** Displays a collection of shoes with multiple filters based on brands
+  like Nike, Adidas.
 - **Product Details Screen:** Users can view details of a selected product and choose the size.
 - **Cart Screen:** Users can view the items in their cart and delete any item if needed.
-- **Checkout Screen:** Includes functionality for applying coupon codes, selecting location, viewing shipping costs, and displaying a price list (subtotal, shipping, discount, total).
+- **Checkout Screen:** Includes functionality for applying coupon codes, selecting location, viewing
+  shipping costs, and displaying a price list (subtotal, shipping, discount, total).
 - **Payment Method:** Users can change the payment method.
 - **Shipping Address:** Users can input and update their address.
 - **Payment Successful Screen:** Confirmation screen displayed after a successful payment.
@@ -24,7 +28,8 @@ To get a local copy up and running follow these simple steps.
 ### Prerequisites
 
 - Flutter SDK: [Install Flutter](https://flutter.dev/docs/get-started/install)
-- Android Studio or VS Code: [Install Android Studio](https://developer.android.com/studio) or [Install VS Code](https://code.visualstudio.com/)
+- Android Studio or VS Code: [Install Android Studio](https://developer.android.com/studio)
+  or [Install VS Code](https://code.visualstudio.com/)
 
 ### Installation
 
